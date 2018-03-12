@@ -1,4 +1,5 @@
 'use strict';
+
 //create first object
 var firstAndPike = {
   minCustomersPike: 23,
@@ -29,6 +30,7 @@ var firstAndPike = {
 };
 firstAndPike.generatePossibilitiesPike();
 
+//SeaTac location
 var seaTac = {
   minCustomersSeaTac: 3,
   maxCustomersSeaTac: 24,
@@ -55,4 +57,30 @@ var seaTac = {
 };
 seaTac.generatePossibilitiesSeaTac();
 
+//Seattle Center Location
+var seattleCenter = {
+  minCustomersCenter: 11,
+  maxCustomersCenter: 38,
+  avgCookieSalesCenter: 3.7,
+  totalCookiesCenter: 0,
+  timeArrayCenter:['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'],
+  randomNumCookiesPerHourCenter: function(){
+    return Math.floor((Math.random() * ((this.maxCustomersCenter - this.minCustomersCenter) + 1) + this.minCustomersCenter) * this.avgCookieSalesCenter);
+  },
+  generatePossibilitiesCenter: function(){
+    var centerContainer = document.getElementById('center');
+    for(var i = 0; i < this.timeArrayCenter.length; i++){
+      var centerElement = document.createElement('li');
+      centerElement.setAttribute('class', 'center-row');
+      var cookiesAtHour = this.randomNumCookiesPerHourCenter();
+      this.totalCookiesCenter += cookiesAtHour;
+      centerElement.textContent = (this.timeArrayCenter[i] + ': ' + this.randomNumCookiesPerHourCenter() + ' cookies.');
+      centerContainer.appendChild(centerElement);
+    }
+    var centerTotalElement = document.createElement('li');
+    centerTotalElement.textContent =('Total: ' + this.totalCookiesCenter + ' cookies.');
+    centerContainer.appendChild(centerTotalElement);
+  }
+};
+seattleCenter.generatePossibilitiesCenter();
 
