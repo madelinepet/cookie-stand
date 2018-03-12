@@ -15,4 +15,4 @@ Madeline Peters
 madelinepet@hotmail.com
 
 ## Aknowledgements:
-Thanks to Code Fellows and my instructional team: Allie Grampa, John Cokos, Catherine Looper, Andrew Bloom, and Michael Stuart. 
+Thanks to Code Fellows and my instructional team: Allie Grampa, John Cokos, Catherine Looper, Andrew Bloom, and Michael Stuart. Thanks especially to Michael for his patience with me today.

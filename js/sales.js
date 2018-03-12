@@ -110,3 +110,30 @@ var capitolHill = {
   }
 };
 capitolHill.generatePossibilitiesHill();
+
+//Alki Location
+var alki = {
+  minCustomersAlki: 20,
+  maxCustomersAlki: 38,
+  avgCookieSalesAlki: 2.3,
+  totalCookiesAlki: 0,
+  timeArrayAlki:['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'],
+  randomNumCookiesPerHourAlki: function(){
+    return Math.floor((Math.random() * ((this.maxCustomersAlki - this.minCustomersAlki) + 1) + this.minCustomersAlki) * this.avgCookieSalesAlki);
+  },
+  generatePossibilitiesAlki: function(){
+    var alkiContainer = document.getElementById('alki');
+    for(var i = 0; i < this.timeArrayAlki.length; i++){
+      var alkiElement = document.createElement('li');
+      alkiElement.setAttribute('class', 'alki-row');
+      var cookiesAtHour = this.randomNumCookiesPerHourAlki();
+      this.totalCookiesAlki += cookiesAtHour;
+      alkiElement.textContent = (this.timeArrayAlki[i] + ': ' + this.randomNumCookiesPerHourAlki() + ' cookies.');
+      alkiContainer.appendChild(alkiElement);
+    }
+    var alkiTotalElement = document.createElement('li');
+    alkiTotalElement.textContent =('Total: ' + this.totalCookiesAlki + ' cookies.');
+    alkiContainer.appendChild(alkiTotalElement);
+  }
+};
+alki.generatePossibilitiesAlki();
