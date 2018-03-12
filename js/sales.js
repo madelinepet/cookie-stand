@@ -84,3 +84,29 @@ var seattleCenter = {
 };
 seattleCenter.generatePossibilitiesCenter();
 
+//Capitol Hill Location
+var capitolHill = {
+  minCustomersHill: 20,
+  maxCustomersHill: 38,
+  avgCookieSalesHill: 2.3,
+  totalCookiesHill: 0,
+  timeArrayHill:['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'],
+  randomNumCookiesPerHourHill: function(){
+    return Math.floor((Math.random() * ((this.maxCustomersHill - this.minCustomersHill) + 1) + this.minCustomersHill) * this.avgCookieSalesHill);
+  },
+  generatePossibilitiesHill: function(){
+    var hillContainer = document.getElementById('capHill');
+    for(var i = 0; i < this.timeArrayHill.length; i++){
+      var hillElement = document.createElement('li');
+      hillElement.setAttribute('class', 'hill-row');
+      var cookiesAtHour = this.randomNumCookiesPerHourHill();
+      this.totalCookiesHill += cookiesAtHour;
+      hillElement.textContent = (this.timeArrayHill[i] + ': ' + this.randomNumCookiesPerHourHill() + ' cookies.');
+      hillContainer.appendChild(hillElement);
+    }
+    var hillTotalElement = document.createElement('li');
+    hillTotalElement.textContent =('Total: ' + this.totalCookiesHill + ' cookies.');
+    hillContainer.appendChild(hillTotalElement);
+  }
+};
+capitolHill.generatePossibilitiesHill();
