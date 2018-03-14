@@ -2,6 +2,7 @@
 
 var timeArray = ['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
 
+var storesArray = [];
 //create a table
 var storesTable = document.getElementById('stores');
 
@@ -14,6 +15,8 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   this.maxCustomers = maxCustomers;
   this.avgCookieSales = avgCookieSales;
   this.hourlySalesArray = [];
+  var dayTotal = 0;
+  storesArray.push(this);
   //for loop is in here now so it iterates for each time I use this constructor(it used to be outside)
   for(var i = 0; i < timeArray.length; i++){
     var randomNumCookiesPerHour = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
@@ -23,7 +26,6 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
 
 //render a a table
 Stores.prototype.renderTable = function (){
-  // this.generateHourlySales();
   //create tr
   var trElement = document.createElement('tr');
   //create td
@@ -40,10 +42,19 @@ Stores.prototype.renderTable = function (){
 
     //append td to tr: put cell onto row before appending whole row
     trElement.appendChild(tdElement);
+
+    this.randomNumCookiesPerHour += this.daytotal;
   }
+  //create cell that says total
+  tdElement = document.createElement('td');
+  //give content
+  tdElement.textContent = 'total';
+  //apend to row 
+  trElement.appendChild(tdElement);
   //append tr to table
   storesTable.appendChild(trElement);
-//outside of method above's for loop, generate total
+//outside of method above's for loop, generate total for day 
+
 };
 
 //create new instances with params to make each object unique
@@ -64,7 +75,7 @@ function makeHeaderRow(){
     //create td
     thElement = document.createElement('th');
     //give td content
-    console.log(this);
+    
     thElement.textContent = timeArray[i];
     //append td to tr: put cell onto row before appending whole row
     headerTrElement.appendChild(thElement);
@@ -81,11 +92,16 @@ function makeFooterRow(){
   footerTrElement.appendChild(footerThElement);
   //append tr to table
   storesTable.appendChild(footerTrElement);
+  //set a counter to zero so I can add contents of hourlysalesarray to it in the for loop
+  var counter = 0;
   for(var i = 0; i < timeArray.length; i++){
+    //add contents of hourlysalesarray
+    var total = (counter += this.hourlySalesArray[i]);
     //create td
     footerThElement = document.createElement('th');
-    //give td placeholder content
-    footerThElement.textContent = '';
+    //give td the content that is the total
+    footerThElement.textContent = total;
+    console.log(total);
     //append
     footerTrElement.appendChild(footerThElement);
   }
