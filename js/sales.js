@@ -5,8 +5,6 @@ var timeArray = ['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm'
 //create array to push all stores into
 var storesArray = [];
 
-var totalDays = [];
-
 //create a table
 var storesTable = document.getElementById('stores');
 
@@ -43,6 +41,7 @@ Stores.prototype.renderTable = function (){
   //give td content
   tdElement.textContent = this.locationName;
   trElement.appendChild(tdElement);
+
   for(var i = 0; i < timeArray.length; i++) {
     //create td
     tdElement = document.createElement('td');
@@ -54,8 +53,6 @@ Stores.prototype.renderTable = function (){
 
     //incriment daytotal
     this.dayTotal += this.hourlySalesArray[i];
-    console.log(this.dayTotal);
-
   }
   //show total on right side
   tdElement = document.createElement('td');
@@ -105,14 +102,15 @@ function makeFooterRow(){
   //append td to tr: put cell onto row before appending whole row
   footerTrElement.appendChild(footerThElement);
   for(var i = 0; i < timeArray.length; i++){
-    console.log(storesArray);
+    var hourTotalSales = 0;
     for(var k = 0; k < storesArray.length; k++ ){
+      hourTotalSales += storesArray[k].hourlySalesArray[i];
     }
     //create td
     var footerTdElement = document.createElement('td');
 
     //give td the content that is the total for the day across all locations
-    footerTdElement.textContent = '';
+    footerTdElement.textContent = hourTotalSales;
 
     //append td to tr
     footerTrElement.appendChild(footerTdElement);
