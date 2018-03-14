@@ -14,14 +14,15 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   this.maxCustomers = maxCustomers;
   this.avgCookieSales = avgCookieSales;
   this.hourlySalesArray = [];
-  //for loop is in here now so it iterates for each time I use this constructor
+  //for loop is in here now so it iterates for each time I use this constructor(it used to be outside)
   for(var i = 0; i < timeArray.length; i++){
     var randomNumCookiesPerHour = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
     this.hourlySalesArray.push(randomNumCookiesPerHour);
   }
 }
-//generateTable method
-Stores.prototype.generateTable = function (){
+
+//render a a table
+Stores.prototype.renderTable = function (){
   // this.generateHourlySales();
   //create tr
   var trElement = document.createElement('tr');
@@ -43,7 +44,6 @@ Stores.prototype.generateTable = function (){
   //append tr to table
   storesTable.appendChild(trElement);
 //outside of method above's for loop, generate total
-//end of generateTable
 };
 
 //create new instances with params to make each object unique
@@ -72,11 +72,30 @@ function makeHeaderRow(){
   //append tr to table
   storesTable.appendChild(headerTrElement);
 }
+//create a footer
+function makeFooterRow(){
+  var footerTrElement = document.createElement('tr');
+  var footerThElement = document.createElement('th');
+  footerThElement.textContent = 'Total';
+  //append td to tr: put cell onto row before appending whole row
+  footerTrElement.appendChild(footerThElement);
+  //append tr to table
+  storesTable.appendChild(footerTrElement);
+  for(var i = 0; i < timeArray.length; i++){
+    //create td
+    footerThElement = document.createElement('th');
+    //give td placeholder content
+    footerThElement.textContent = '';
+    //append
+    footerTrElement.appendChild(footerThElement);
+  }
+}
 
 //call functions, starting with above header row fn, followed by rendering each object
 makeHeaderRow();
-pike.generateTable();
-seaTac.generateTable();
-center.generateTable();
-hill.generateTable();
-alki.generateTable();
+pike.renderTable();
+seaTac.renderTable();
+center.renderTable();
+hill.renderTable();
+alki.renderTable();
+makeFooterRow();
