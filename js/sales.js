@@ -8,6 +8,9 @@ var storesArray = [];
 //create a table
 var storesTable = document.getElementById('stores');
 
+//define global variable store form
+var newStore = document.getElementById('newStore');
+
 //constructor function
 //use cap first letter for fn name, pass in params that need to be unique for each
 function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
@@ -63,11 +66,11 @@ Stores.prototype.renderTable = function (){
 };
 
 //create new instances with params to make each object unique
-var pike = new Stores('First and Pike', 23, 65, 6.3);
-var seaTac= new Stores('SeaTac', 3, 24, 1.2);
-var center= new Stores('Seattle Center', 11, 38, 3.7);
-var hill= new Stores('Capitol Hill', 20, 28, 2.3);
-var alki= new Stores('Alki', 2, 16, 4.6);
+new Stores('First and Pike', 23, 65, 6.3);
+new Stores('SeaTac', 3, 24, 1.2);
+new Stores('Seattle Center', 11, 38, 3.7);
+new Stores('Capitol Hill', 20, 28, 2.3);
+new Stores('Alki', 2, 16, 4.6);
 
 //make new function to make a header row
 function makeHeaderRow(){
@@ -119,19 +122,35 @@ function makeFooterRow(){
   storesTable.appendChild(footerTrElement);
 }
 
-//call functions, starting with above header row fn, followed by rendering each object
+//single function to call all store rows
+function renderAllStores (){
+  for(var i in storesArray){
+    storesArray[i].renderTable();
+  }
+}
+
+//event listener's callback function
+function addNewStore(event){
+  //need to stop the button from refreshing instead of submitting which is its default
+  event.preventDefault();
+
+  var newName= event.target.storeName.value;
+  var newMinCust = event.target.minCust.value;
+  var newMaxCust= event.target.maxCust.value;
+  var newAvgCookiesPerCust= event.target.avgCookiesPerCust.value;
+
+  new Stores(newName, newMinCust, newMaxCust, newAvgCookiesPerCust);
+
+  storesTable.innerHTML = '';
+  makeHeaderRow();
+  renderAllStores();
+}
+
+//event listener
+newStore.addEventListener('submit', addNewStore);
+
+
+//call functions
 makeHeaderRow();
-
-pike.renderTable();
-
-seaTac.renderTable();
-
-
-center.renderTable();
-
-
-hill.renderTable();
-
-alki.renderTable();
+renderAllStores();
 makeFooterRow();
-

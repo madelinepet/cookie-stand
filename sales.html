@@ -9,21 +9,37 @@
     <!-- want reset first as code is run in order -->
 
     <link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
   </head>
 <body>
-  <a href = index.html>Customer Page</a>
+  
   <img src="img/salmon.png" alt="salmon image"></img>
-  <h1>Store Data</h1>
+
+  <h1>STORE SALES DATA</h1>
+  <a href = index.html>Take Me to the Customer Page</a>
   <table id="stores">
   </table>
-  
-  <form id= "newStore">
-    <legend>Create a New Store!</legend>
-    <label for="storeName">Store Name:</label>
-    <input type="text" name= "storeName">
 
-    <label for=""></label>
-  </form>
+ <div> <form id= "newStore">
+    <fieldset>
+      <legend>Create a New Store!</legend>
+      <label for="storeName">Store Name:</label>
+      <input type="text" name= "storeName">
+    
+      <label for="minCust">Minimum Number of Customers Per Day</label>
+      <input type="text" name= "minCust">
+
+      <label for="maxCust">Maximum Number of Customers Per Day</label>
+      <input type="text" name= "maxCust">
+
+      <label for="avgCookiesPerCust">Average Cookies Per Customer</label>
+      <input type="text" name= "avgCookiesPerCust">
+
+      <button> Add New Location</button>
+
+    </fieldset>
+    </form>
+  </div>
   <script src ="js/sales.js"></script>
   </body>
 </html>
