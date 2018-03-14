@@ -144,6 +144,7 @@ function addNewStore(event){
   storesTable.innerHTML = '';
   makeHeaderRow();
   renderAllStores();
+  makeFooterRow();
 }
 
 //event listener

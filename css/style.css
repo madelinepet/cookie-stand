@@ -1,6 +1,7 @@
 * {
   background-color: lightblue;
 }
+
 img {
   height: 200px;
   padding: 50px;
@@ -8,6 +9,7 @@ img {
 
 h1 {
 font-size: 1.8em;
+color: blue;
 text-align: center;
 background-color: lightblue;
 width: 1245x;
@@ -18,7 +20,7 @@ font-family: 'Bitter', serif;
 
 table, th, td {
   background-color: salmon;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   width: 1000px;
   padding: 15px;
   border: 1px dashed blue;
@@ -30,5 +32,19 @@ th{
 }
 
 div {
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 50px;
+  padding: 30px;
+  background-color: white;
+  border: 1px dashed green;
+  width: 1250px;
+}
+button:hover{
+color: white;
+}
+
+a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4em;
+  margin-bottom: 10px;
 }
