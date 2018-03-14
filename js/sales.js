@@ -2,7 +2,11 @@
 
 var timeArray = ['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
 
+//create array to push all stores into
 var storesArray = [];
+
+var totalDays = [];
+
 //create a table
 var storesTable = document.getElementById('stores');
 
@@ -15,17 +19,23 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   this.maxCustomers = maxCustomers;
   this.avgCookieSales = avgCookieSales;
   this.hourlySalesArray = [];
-  var dayTotal = 0;
+  this.dayTotal = 0;
+  this.acrossLocs = 0;
   storesArray.push(this);
-  //for loop is in here now so it iterates for each time I use this constructor(it used to be outside)
-  for(var i = 0; i < timeArray.length; i++){
-    var randomNumCookiesPerHour = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
-    this.hourlySalesArray.push(randomNumCookiesPerHour);
-  }
 }
+
+//move for this loop out of constructor
+Stores.prototype.randomNumCookiesPerHour= function (){
+  for(var i = 0; i < timeArray.length; i++){
+    var randomNumCookies = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
+    this.hourlySalesArray.push(randomNumCookies);
+  }
+};
 
 //render a a table
 Stores.prototype.renderTable = function (){
+  this.randomNumCookiesPerHour();
+
   //create tr
   var trElement = document.createElement('tr');
   //create td
@@ -33,7 +43,6 @@ Stores.prototype.renderTable = function (){
   //give td content
   tdElement.textContent = this.locationName;
   trElement.appendChild(tdElement);
-
   for(var i = 0; i < timeArray.length; i++) {
     //create td
     tdElement = document.createElement('td');
@@ -43,8 +52,16 @@ Stores.prototype.renderTable = function (){
     //append td to tr: put cell onto row before appending whole row
     trElement.appendChild(tdElement);
 
-    this.randomNumCookiesPerHour += this.daytotal;
+    //incriment daytotal
+    this.dayTotal += this.hourlySalesArray[i];
+    console.log(this.dayTotal);
+
   }
+  //show total on right side
+  tdElement = document.createElement('td');
+  tdElement.textContent = this.dayTotal;
+  trElement.appendChild(tdElement);
+  //append row to table
   storesTable.appendChild(trElement);
 };
 
@@ -74,7 +91,7 @@ function makeHeaderRow(){
   //create cell that says total- this needs to go in header to only be added into top row
   var tdElement = document.createElement('td');
   //give content
-  tdElement.textContent = 'total';
+  tdElement.textContent = 'Total for Day at Location';
   //apend to row
   headerTrElement.appendChild(tdElement);
   //append tr to table
@@ -84,31 +101,39 @@ function makeHeaderRow(){
 function makeFooterRow(){
   var footerTrElement = document.createElement('tr');
   var footerThElement = document.createElement('th');
-  footerThElement.textContent = 'Total';
+  footerThElement.textContent = 'Total for Hour Across Locations';
   //append td to tr: put cell onto row before appending whole row
   footerTrElement.appendChild(footerThElement);
+  for(var i = 0; i < timeArray.length; i++){
+    console.log(storesArray);
+    for(var k = 0; k < storesArray.length; k++ ){
+    }
+    //create td
+    var footerTdElement = document.createElement('td');
+
+    //give td the content that is the total for the day across all locations
+    footerTdElement.textContent = '';
+
+    //append td to tr
+    footerTrElement.appendChild(footerTdElement);
+  }
   //append tr to table
   storesTable.appendChild(footerTrElement);
-  //set a counter to zero so I can add contents of hourlysalesarray to it in the for loop
-  var counter = 0;
-  for(var i = 0; i < timeArray.length; i++){
-    //add contents of hourlysalesarray
-    var total = (counter += this.hourlySalesArray[i]);
-    //create td
-    footerThElement = document.createElement('th');
-    //give td the content that is the total
-    footerThElement.textContent = total;
-    console.log(total);
-    //append
-    footerTrElement.appendChild(footerThElement);
-  }
 }
 
 //call functions, starting with above header row fn, followed by rendering each object
 makeHeaderRow();
+
 pike.renderTable();
+
 seaTac.renderTable();
+
+
 center.renderTable();
+
+
 hill.renderTable();
+
 alki.renderTable();
 makeFooterRow();
+
