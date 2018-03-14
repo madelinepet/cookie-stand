@@ -3,27 +3,24 @@ img {
  }
 
 h1 {
+font-size: 1.2em;
+text-align: center;
 background-color: lightblue;
-width: 1000px;
+width: 1155px;
 padding: 15px;
 margin-bottom: 0px;
 border: 1px dashed blue; 
 }
 
-ul {
+table, th, td {
   background-color: salmon;
   margin-bottom: 40px;
-  width: 1000px;
+  width: 1030px;
   padding: 15px;
   border: 1px dashed blue;
-  font-weight: bold;
   font-family: 'Mina', sans-serif;
 }
 
-li {
-margin-top: 30px;   
-margin-bottom: 30px;
-padding: 10px;
-font-weight: normal;
+th{
+  font-weight: bold;
 }
-
