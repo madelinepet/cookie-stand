@@ -45,16 +45,7 @@ Stores.prototype.renderTable = function (){
 
     this.randomNumCookiesPerHour += this.daytotal;
   }
-  //create cell that says total
-  tdElement = document.createElement('td');
-  //give content
-  tdElement.textContent = 'total';
-  //apend to row 
-  trElement.appendChild(tdElement);
-  //append tr to table
   storesTable.appendChild(trElement);
-//outside of method above's for loop, generate total for day 
-
 };
 
 //create new instances with params to make each object unique
@@ -75,11 +66,17 @@ function makeHeaderRow(){
     //create td
     thElement = document.createElement('th');
     //give td content
-    
+
     thElement.textContent = timeArray[i];
     //append td to tr: put cell onto row before appending whole row
     headerTrElement.appendChild(thElement);
   }
+  //create cell that says total- this needs to go in header to only be added into top row
+  var tdElement = document.createElement('td');
+  //give content
+  tdElement.textContent = 'total';
+  //apend to row
+  headerTrElement.appendChild(tdElement);
   //append tr to table
   storesTable.appendChild(headerTrElement);
 }
