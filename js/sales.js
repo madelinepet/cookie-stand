@@ -2,8 +2,14 @@
 
 var timeArray = ['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
 
+//create array to push all stores into
+var storesArray = [];
+
 //create a table
 var storesTable = document.getElementById('stores');
+
+//define global variable store form
+var newStore = document.getElementById('newStore');
 
 //constructor function
 //use cap first letter for fn name, pass in params that need to be unique for each
@@ -14,16 +20,23 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   this.maxCustomers = maxCustomers;
   this.avgCookieSales = avgCookieSales;
   this.hourlySalesArray = [];
-  //for loop is in here now so it iterates for each time I use this constructor(it used to be outside)
-  for(var i = 0; i < timeArray.length; i++){
-    var randomNumCookiesPerHour = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
-    this.hourlySalesArray.push(randomNumCookiesPerHour);
-  }
+  this.dayTotal = 0;
+  this.acrossLocs = 0;
+  storesArray.push(this);
 }
+
+//move for this loop out of constructor
+Stores.prototype.randomNumCookiesPerHour= function (){
+  for(var i = 0; i < timeArray.length; i++){
+    var randomNumCookies = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
+    this.hourlySalesArray.push(randomNumCookies);
+  }
+};
 
 //render a a table
 Stores.prototype.renderTable = function (){
-  // this.generateHourlySales();
+  this.randomNumCookiesPerHour();
+
   //create tr
   var trElement = document.createElement('tr');
   //create td
@@ -40,18 +53,24 @@ Stores.prototype.renderTable = function (){
 
     //append td to tr: put cell onto row before appending whole row
     trElement.appendChild(tdElement);
+
+    //incriment daytotal
+    this.dayTotal += this.hourlySalesArray[i];
   }
-  //append tr to table
+  //show total on right side
+  tdElement = document.createElement('td');
+  tdElement.textContent = this.dayTotal;
+  trElement.appendChild(tdElement);
+  //append row to table
   storesTable.appendChild(trElement);
-//outside of method above's for loop, generate total
 };
 
 //create new instances with params to make each object unique
-var pike = new Stores('First and Pike', 23, 65, 6.3);
-var seaTac= new Stores('SeaTac', 3, 24, 1.2);
-var center= new Stores('Seattle Center', 11, 38, 3.7);
-var hill= new Stores('Capitol Hill', 20, 28, 2.3);
-var alki= new Stores('Alki', 2, 16, 4.6);
+new Stores('First and Pike', 23, 65, 6.3);
+new Stores('SeaTac', 3, 24, 1.2);
+new Stores('Seattle Center', 11, 38, 3.7);
+new Stores('Capitol Hill', 20, 28, 2.3);
+new Stores('Alki', 2, 16, 4.6);
 
 //make new function to make a header row
 function makeHeaderRow(){
@@ -64,11 +83,17 @@ function makeHeaderRow(){
     //create td
     thElement = document.createElement('th');
     //give td content
-    console.log(this);
+
     thElement.textContent = timeArray[i];
     //append td to tr: put cell onto row before appending whole row
     headerTrElement.appendChild(thElement);
   }
+  //create cell that says total- this needs to go in header to only be added into top row
+  var tdElement = document.createElement('td');
+  //give content
+  tdElement.textContent = 'Total for Day at Location';
+  //apend to row
+  headerTrElement.appendChild(tdElement);
   //append tr to table
   storesTable.appendChild(headerTrElement);
 }
@@ -76,26 +101,57 @@ function makeHeaderRow(){
 function makeFooterRow(){
   var footerTrElement = document.createElement('tr');
   var footerThElement = document.createElement('th');
-  footerThElement.textContent = 'Total';
+  footerThElement.textContent = 'Total for Hour Across Locations';
   //append td to tr: put cell onto row before appending whole row
   footerTrElement.appendChild(footerThElement);
+  for(var i = 0; i < timeArray.length; i++){
+    var hourTotalSales = 0;
+    for(var k = 0; k < storesArray.length; k++ ){
+      hourTotalSales += storesArray[k].hourlySalesArray[i];
+    }
+    //create td
+    var footerTdElement = document.createElement('td');
+
+    //give td the content that is the total for the day across all locations
+    footerTdElement.textContent = hourTotalSales;
+
+    //append td to tr
+    footerTrElement.appendChild(footerTdElement);
+  }
   //append tr to table
   storesTable.appendChild(footerTrElement);
-  for(var i = 0; i < timeArray.length; i++){
-    //create td
-    footerThElement = document.createElement('th');
-    //give td placeholder content
-    footerThElement.textContent = '';
-    //append
-    footerTrElement.appendChild(footerThElement);
+}
+
+//single function to call all store rows
+function renderAllStores (){
+  for(var i in storesArray){
+    storesArray[i].renderTable();
   }
 }
 
-//call functions, starting with above header row fn, followed by rendering each object
+//event listener's callback function
+function addNewStore(event){
+  //need to stop the button from refreshing instead of submitting which is its default
+  event.preventDefault();
+
+  var newName= event.target.storeName.value;
+  var newMinCust = event.target.minCust.value;
+  var newMaxCust= event.target.maxCust.value;
+  var newAvgCookiesPerCust= event.target.avgCookiesPerCust.value;
+
+  new Stores(newName, newMinCust, newMaxCust, newAvgCookiesPerCust);
+
+  storesTable.innerHTML = '';
+  makeHeaderRow();
+  renderAllStores();
+  makeFooterRow();
+}
+
+//event listener
+newStore.addEventListener('submit', addNewStore);
+
+
+//call functions
 makeHeaderRow();
-pike.renderTable();
-seaTac.renderTable();
-center.renderTable();
-hill.renderTable();
-alki.renderTable();
+renderAllStores();
 makeFooterRow();
