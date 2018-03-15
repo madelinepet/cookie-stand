@@ -4,7 +4,7 @@
 
 img {
   height: 150px;
-  padding: 50px;
+  padding: 40px;
  }
 
 h1 {
@@ -26,7 +26,6 @@ text-align: center;
 
 table, th, td {
   background-color: salmon;
-  /* margin-bottom: 40px; */
   width: 1000px;
   padding: 15px;
   border: 1px dashed blue;
@@ -45,8 +44,14 @@ div {
   border: 1px dashed green;
   width: 1250px;
 }
+
 button:hover{
 color: white;
+border: 1px inset green;
+}
+
+div fieldset form input {
+  background-color: white;
 }
 
 a {
@@ -56,4 +61,4 @@ a {
 }
 a:hover{
   color: white;
-}
+ }
