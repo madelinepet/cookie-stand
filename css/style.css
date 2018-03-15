@@ -7,6 +7,10 @@ img {
   padding: 40px;
  }
 
+#chinook {
+  margin: auto;
+}
+
 h1 {
 font-size: 1.8em;
 color: blue;
@@ -20,29 +24,38 @@ font-family: 'Bitter', serif;
 
 h2 {
 color: salmon;
+font-size: 1.7em;
 font-family: Arial, Helvetica, sans-serif;
 text-align: center;
 }
 
 table, th, td {
-  background-color: salmon;
+  background-color: lightsalmon;
+  margin: 50px;
   width: 1000px;
   padding: 15px;
-  border: 1px dashed blue;
+  border: 1px inset blue;
   font-family: 'Mina', sans-serif;
 }
 
 th{
   font-weight: bold;
+  padding: 15px;
 }
 
 div {
   font-family: Arial, Helvetica, sans-serif;
-  margin-bottom: 50px;
+  margin: 50px;
   padding: 30px;
   background-color: white;
-  border: 1px dashed green;
+  border: 1px ridge green;
   width: 1250px;
+}
+
+nav {
+  border: 1px inset darkblue;
+  margin: 20px;
+  padding: 10px;
 }
 
 button:hover{
@@ -50,15 +63,29 @@ color: white;
 border: 1px inset green;
 }
 
-div fieldset form input {
+/* background color was bleeding through to form. This is how I fixed it */
+fieldset, label, input, legend {
   background-color: white;
+}
+
+legend {
+  font-family: 'Mina', sans-serif;
+  color: blue;
+  font-size: 1.6em;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 a {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.0em;
+  font-size: 1.7em;
   margin-bottom: 10px;
-}
+ }
+
 a:hover{
   color: white;
  }
+
+h4 {
+  padding: 0px;
+}

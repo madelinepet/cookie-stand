@@ -119,6 +119,12 @@ function makeFooterRow(){
     //append td to tr
     footerTrElement.appendChild(footerTdElement);
   }
+  //create bottom right cell
+  footerThElement = document.createElement('th');
+  //give empty content
+  footerThElement.textContent = '';
+  //append to row
+  footerTrElement.appendChild(footerThElement);
   //append tr to table
   storesTable.appendChild(footerTrElement);
 }
