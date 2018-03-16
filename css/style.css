@@ -82,6 +82,10 @@ a {
   margin-bottom: 10px;
  }
 
+tr:nth-child(odd){
+  background-color: white;
+} 
+
 h4 {
   font-family: 'Bitter', serif;
   color: green;

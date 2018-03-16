@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>Cookie Stand</title>
+      <link rel = "stylesheet" href="css/reset.css">
+      <!-- relative file path to the folder we're in  -->
+  
+      <link rel = "stylesheet" href="css/style.css">
+      <!-- want reset first as code is run in order -->
+  
+      <link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+  </head>
+  <body>
+    <a href="index.html">Take me back to the storefront</a>
+    <div>
+      <img src="img/shirt.jpg" alt="shirt">
+      <form id = "shirtrOrder">
+        <fieldset>
+          <legend>Order our shirt!</legend>
+            <label for= "shirts">Please select your size.</label>
+            <select name = "shirts">
+              <option value="xsSize">XS</option>
+              <option value="sSize">Small</option>
+              <option value="mSize">Medium</option>
+              <option value="lSize">Large</option>
+              <option value="xlSize">XL</option>
+            </select>
+        </fieldset>
+       </form>
+    </div>
+    <div>
+      <img src="img/cutter.jpeg" alt="cookiecutter">
+      <form id = "cookieCutterOrder">
+        <fieldset>
+          <legend>Order our signature cookie cutter!</legend>
+          <label for="cookieCutter">Please select your desired quantity.</label>
+          <input type="number" name= "cookieCutter">
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
