@@ -1,4 +1,4 @@
-* {
+body{
   background-color: lightblue;
 }
 
@@ -30,9 +30,9 @@ text-align: center;
 }
 
 table, th, td {
-  background-color: lightsalmon;
-  margin: 50px;
-  width: 1000px;
+  margin: auto;
+  margin-bottom: 20px;
+  width: 80%;
   padding: 15px;
   border: 1px inset blue;
   font-family: 'Mina', sans-serif;
@@ -43,13 +43,23 @@ th{
   padding: 15px;
 }
 
+tr:nth-child(odd){
+  background-color: salmon;
+} 
+
+tr:nth-child(even){
+  background-color: lightsalmon;
+}
+
 div {
   font-family: Arial, Helvetica, sans-serif;
-  margin: 50px;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 10px;
   padding: 30px;
   background-color: white;
   border: 1px ridge green;
-  width: 1250px;
+  width: 80%;
 }
 
 nav {
@@ -63,7 +73,6 @@ color: white;
 border: 1px inset green;
 }
 
-/* background color was bleeding through to form. This is how I fixed it */
 fieldset, label, input, legend {
   background-color: white;
 }
@@ -82,9 +91,6 @@ a {
   margin-bottom: 10px;
  }
 
-tr:nth-child(odd){
-  background-color: white;
-} 
 
 h4 {
   font-family: 'Bitter', serif;
