@@ -89,11 +89,11 @@ function makeHeaderRow(){
     headerTrElement.appendChild(thElement);
   }
   //create cell that says total- this needs to go in header to only be added into top row
-  var tdElement = document.createElement('td');
+  var lastThElement = document.createElement('th');
   //give content
-  tdElement.textContent = 'Total for Day at Location';
+  lastThElement.textContent = 'Total for Day at Location';
   //apend to row
-  headerTrElement.appendChild(tdElement);
+  headerTrElement.appendChild(lastThElement);
   //append tr to table
   storesTable.appendChild(headerTrElement);
 }
@@ -104,6 +104,7 @@ function makeFooterRow(){
   footerThElement.textContent = 'Total for Hour Across Locations';
   //append td to tr: put cell onto row before appending whole row
   footerTrElement.appendChild(footerThElement);
+  //do not use i and k in the future. Descriptive variables can be more helpful.
   for(var i = 0; i < timeArray.length; i++){
     var hourTotalSales = 0;
     for(var k = 0; k < storesArray.length; k++ ){
@@ -118,6 +119,12 @@ function makeFooterRow(){
     //append td to tr
     footerTrElement.appendChild(footerTdElement);
   }
+  //create bottom right cell
+  footerThElement = document.createElement('th');
+  //give empty content
+  footerThElement.textContent = '';
+  //append to row
+  footerTrElement.appendChild(footerThElement);
   //append tr to table
   storesTable.appendChild(footerTrElement);
 }
@@ -131,23 +138,26 @@ function renderAllStores (){
 
 //event listener's callback function
 function addNewStore(event){
-  //need to stop the button from refreshing instead of submitting which is its default
+  //need to stop the button from refreshing which is the default behavior instead of submitting
   event.preventDefault();
 
+  //these lines "drill" into the specific inputs for each form field box. After event.target, the next part (eg storeName) comes from the HTML name on the input element
   var newName= event.target.storeName.value;
   var newMinCust = event.target.minCust.value;
   var newMaxCust= event.target.maxCust.value;
   var newAvgCookiesPerCust= event.target.avgCookiesPerCust.value;
 
+  //this line creates a new store instance using the Stores constructor function with the arguments as variables that are defined in the block above
   new Stores(newName, newMinCust, newMaxCust, newAvgCookiesPerCust);
 
+  //these lines reset the table content to blank so it can rebuild the table after the input is added so the new store on the new row is above the header
   storesTable.innerHTML = '';
   makeHeaderRow();
   renderAllStores();
   makeFooterRow();
 }
 
-//event listener
+//event listener. Global var newStore defined at the top. Gets HTML element by ID. Then on submit, event is sent through the addNewStore function.
 newStore.addEventListener('submit', addNewStore);
 
 
