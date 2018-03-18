@@ -25,7 +25,7 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   storesArray.push(this);
 }
 
-//move for this loop out of constructor
+//move for loop out of constructor
 Stores.prototype.randomNumCookiesPerHour= function (){
   for(var i = 0; i < timeArray.length; i++){
     var randomNumCookies = Math.floor((Math.random() * (this.maxCustomers-this.minCustomers) + this.minCustomers) * this.avgCookieSales);
@@ -33,7 +33,7 @@ Stores.prototype.randomNumCookiesPerHour= function (){
   }
 };
 
-//render a a table
+//render a table
 Stores.prototype.renderTable = function (){
   this.randomNumCookiesPerHour();
 
