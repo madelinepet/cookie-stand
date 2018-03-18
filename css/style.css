@@ -91,6 +91,14 @@ a {
   margin-bottom: 10px;
  }
 
+#chartLink {
+  position: relative;
+  left: 130px;
+}
+#backToStorefront {
+  position: relative;
+  left: 110px;
+}
 
 h4 {
   font-family: 'Bitter', serif;
