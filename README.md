@@ -5,7 +5,7 @@ code 201 week 2 lab
 As a student at Code Fellows, I would like to design a project that uses two HTML and two JS files to create a front-facing and a back facing website that appropriately solves the explained problem domain.
 
 ## Design
-This project analyzes sales and provides a marketing website for a fake client.
+This project analyzes sales and provides a marketing website for a fake client who needs help selling salmon cookies.
 
 ## Built with: 
 VS Code using HTML, CSS, and JavaScript.
