@@ -2,6 +2,8 @@
 
 var timeArray = ['6am', '7am','8am','9am','10am','11am','12am','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
 
+var totalTotalsArr = [];
+
 //create array to push all stores into
 var storesArray = [];
 
@@ -22,6 +24,7 @@ function Stores(locationName, minCustomers, maxCustomers, avgCookieSales) {
   this.hourlySalesArray = [];
   this.dayTotal = 0;
   this.acrossLocs = 0;
+  this.totalTotal = 0;
   storesArray.push(this);
 }
 
@@ -57,6 +60,7 @@ Stores.prototype.renderTable = function (){
     //incriment daytotal
     this.dayTotal += this.hourlySalesArray[i];
   }
+  totalTotalsArr.push(this.dayTotal);
   //show total on right side
   tdElement = document.createElement('td');
   tdElement.textContent = this.dayTotal;
@@ -107,8 +111,13 @@ function makeFooterRow(){
   //do not use i and k in the future. Descriptive variables can be more helpful.
   for(var i = 0; i < timeArray.length; i++){
     var hourTotalSales = 0;
+    // var totalTotal = 0;
     for(var k = 0; k < storesArray.length; k++ ){
       hourTotalSales += storesArray[k].hourlySalesArray[i];
+      // console.log('hour total', hourTotalSales);
+      // totalTotal += hourTotalSales;
+      // console.log('totalTotal', totalTotal);
+
     }
     //create td
     var footerTdElement = document.createElement('td');
@@ -121,8 +130,14 @@ function makeFooterRow(){
   }
   //create bottom right cell
   footerThElement = document.createElement('th');
-  //give empty content
-  footerThElement.textContent = '';
+
+  //give content that is sum of totals
+  var totalTotal = 0;
+  for(i=0; i<totalTotalsArr.length; i++) {
+    totalTotal += totalTotalsArr[i];
+  }
+
+  footerThElement.textContent = totalTotal;
   //append to row
   footerTrElement.appendChild(footerThElement);
   //append tr to table
